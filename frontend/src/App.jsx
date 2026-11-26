@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 
+const API_URL = import.meta.env.VITE_API_URL || 'https://passtheplate.onrender.com';
+
 function App() {
   const [donations, setDonations] = useState([]);
   const [donorName, setDonorName] = useState('');
@@ -7,7 +9,7 @@ function App() {
   const [pickupAddress, setPickupAddress] = useState('');
 
   const fetchDonations = async () => {
-    const res = await fetch('http://localhost:5000/api/donations');
+    const res = await fetch(`${API_URL}/api/donations`);
     const data = await res.json();
     setDonations(data);
   };
@@ -18,7 +20,7 @@ function App() {
 
   const handlePost = async (e) => {
     e.preventDefault();
-    await fetch('http://localhost:5000/api/donations', {
+    await fetch(`${API_URL}/api/donations`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ donorName, foodDetails, pickupAddress }),
@@ -33,7 +35,7 @@ function App() {
     const homeName = prompt('Enter your Childcare or Elderly Home name:');
     if (!homeName) return;
 
-    await fetch(`http://localhost:5000/api/donations/${id}/claim`, {
+    await fetch(`${API_URL}/api/donations/${id}/claim`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ claimedBy: homeName }),
@@ -86,14 +88,4 @@ function App() {
           </p>
 
           {item.status === 'Available' && (
-            <button onClick={() => handleClaim(item._id)} style={{ padding: '6px 12px', background: '#1565c0', color: '#fff', border: 'none', cursor: 'pointer' }}>
-              Claim for Care Home
-            </button>
-          )}
-        </div>
-      ))}
-    </div>
-  );
-}
-
-export default App;
+            <button on
