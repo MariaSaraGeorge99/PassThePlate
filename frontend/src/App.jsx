@@ -88,4 +88,14 @@ function App() {
           </p>
 
           {item.status === 'Available' && (
-            <button on
+            <button onClick={() => handleClaim(item._id)} style={{ padding: '6px 12px', background: '#1565c0', color: '#fff', border: 'none', cursor: 'pointer' }}>
+              Claim for Care Home
+            </button>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export default App;
